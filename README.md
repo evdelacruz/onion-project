@@ -7,11 +7,12 @@
 
 ## Summary
 
-An *onion* architecture example developed under DDD principle.
+An *onion* architecture demo developed under DDD principle.
 
 ## Technologies
 
 * Java
 * Spring Boot
 * MapStruct
+* FlyWay
 * REST (Hateoas)

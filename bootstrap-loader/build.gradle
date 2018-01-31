@@ -8,7 +8,7 @@ compileJava.options.encoding = 'UTF-8'
 sourceCompatibility = 1.8
 
 dependencies {
-    compile 'org.postgresql:postgresql:42.1.4'
+    compile 'org.flywaydb:flyway-core'
     compile project(':core')
 }
 
