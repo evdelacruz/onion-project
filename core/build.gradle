@@ -1,0 +1,19 @@
+plugins {
+    id 'org.springframework.boot' version '1.5.9.RELEASE'
+    id 'net.ltgt.apt' version '0.13'
+    id 'java'
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.hateoas:spring-hateoas'
+    compile 'org.hibernate:hibernate-core:5.2.12.Final'
+    compile 'org.hibernate:hibernate-java8:5.2.12.Final'
+    compile 'com.zaxxer:HikariCP:2.7.2'
+    compile 'org.postgresql:postgresql:42.1.4'
+    compile 'javax.inject:javax.inject:1'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
+    apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
+}

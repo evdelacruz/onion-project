@@ -1,0 +1,29 @@
+plugins {
+    id 'org.springframework.boot' version '1.5.9.RELEASE'
+    id 'java'
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    compile 'org.postgresql:postgresql:42.1.4'
+    compile project(':core')
+}
+
+bootRepackage {
+    mainClass = 'com.aysoft.onionproject.Main'
+    executable = true
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Vendor'	     : 'AYSOFT S.A.',
+                   'Implementation-Version'	     : version,
+                   'Implementation-Title'	     : 'ONION ARQUITECTURE APPLICATION',
+                   'Implementation-Unit'   	     : 'samples',
+                   'Java-Implementation-Version' : sourceCompatibility
+    }
+    baseName = 'onion-application'
+}

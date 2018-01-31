@@ -1,0 +1,9 @@
+subprojects {
+
+    group 'com.aysoft.onionproject'
+    version '1.0.0.M1'
+
+    repositories {
+        mavenCentral()
+    }
+}

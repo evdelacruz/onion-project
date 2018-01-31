@@ -1,0 +1,7 @@
+[
+  {
+    "pattern":   "%h %l %u %t %r %s %b %T",
+    "prefix":    "application-access",
+    "suffix":    ".log"
+  }
+]

@@ -1,0 +1,29 @@
+#Application Properties
+application:
+    server:
+        logs:
+            config-file: application-valves.json
+
+#Spring Properties
+spring:
+    output:
+        ansi:
+            enabled: always
+    mvc:
+        favicon:
+            enabled: false
+        servlet:
+            load-on-startup: 1
+    jackson:
+        default-property-inclusion: non_absent
+        serialization:
+            WRITE_DATES_AS_TIMESTAMPS: false
+        mapper:
+            PROPAGATE_TRANSIENT_MARKER: true
+
+
+#Server Properties
+server:
+    port: ${application.server.port}
+
+
