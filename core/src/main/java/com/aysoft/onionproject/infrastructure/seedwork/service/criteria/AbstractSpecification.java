@@ -7,57 +7,39 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.Arrays;
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public abstract class AbstractSpecification<E extends AbstractEntity> implements Specification<E> {
-    private Predicate[] predicates = new Predicate[20];
-    private int index = 0;
-    private Root<E> root;
-    private CriteriaBuilder builder;
+public abstract class AbstractSpecification<E extends AbstractEntity> extends PredicateBuilder<E> implements Specification<E> {
 
-    public abstract void buildPredicate();
+    public abstract void buildSpecification();
 
-    public Predicate toPredicate(Root<E> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+    public final Predicate toPredicate(Root<E> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
         this.root = root;
         this.builder = builder;
-        return this.getPredicate();
+        return this.build();
     }
 
-    protected void eq(String field, Object value) {
-        predicates[index++] = builder.equal(root.get(field), value);
-    }
-
-    protected void eq(Supplier<Boolean> condition, String field, Object value) {
+    protected <J> void join(Supplier<Boolean> condition, Consumer<JoinBuilder<J,E>> function) {
         if (condition.get()) {
-            this.eq(field, value);
+            this.join(function);
         }
     }
 
-    protected void match(String field, String value) {
-        predicates[index++] = builder.like(builder.lower(root.get(field)), String.format("%%%s%%", value.toLowerCase()));
+    protected <J> void join(Consumer<JoinBuilder<J,E>> function) {
+        JoinBuilder<J,E> join = new JoinBuilder<>(root, builder);
+        function.accept(join);
+        join.build();
     }
 
-    protected void match(Supplier<Boolean> condition, String field, String value) {
-        if (condition.get()) {
-            this.match(field, value);
-        }
-    }
-
-    protected void join(BiConsumer<Root<E>, CriteriaBuilder> function) {
-        function.accept(root, builder);
-    }
-
-    //<editor-fold desc="Support methods">
-    private Predicate getPredicate() {
-        this.buildPredicate();
-        if (index == 0) {
+    private Predicate build() {
+        this.buildSpecification();
+        if (0 == index) {
             return null;
         }
-        if (index == 1) {
+        if (1 == index) {
             return predicates[0];
         }
         return builder.and(index < predicates.length ? Arrays.copyOf(predicates, index) : predicates);
     }
-    //</editor-fold>
 }

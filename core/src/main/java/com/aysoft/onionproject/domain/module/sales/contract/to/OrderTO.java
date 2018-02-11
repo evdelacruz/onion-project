@@ -1,14 +1,16 @@
-package com.aysoft.onionproject.domain.module.sales.contract.vo;
+package com.aysoft.onionproject.domain.module.sales.contract.to;
 
-import com.aysoft.onionproject.infrastructure.seedwork.binding.vo.TransferObject;
+import com.aysoft.onionproject.infrastructure.seedwork.binding.annotation.Ignore;
+import com.aysoft.onionproject.infrastructure.seedwork.binding.to.IdentifiableTO;
+import com.aysoft.onionproject.infrastructure.seedwork.binding.to.TransferObject;
 import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
-public class OrderTO extends TransferObject {
+public class OrderTO extends TransferObject implements IdentifiableTO<Integer> {
     private static final long serialVersionUID = 5426232815219965497L;
     private int id;
-    private transient Integer state;
+    private Integer state;
     private LocalDate date;
     private String referenceId;
     private int priority;
@@ -16,7 +18,8 @@ public class OrderTO extends TransferObject {
     public OrderTO() {}
 
     //<editor-fold desc="Encapsulation">
-    public int getId() {
+    @Ignore
+    public Integer getId() {
         return id;
     }
 
@@ -26,6 +29,7 @@ public class OrderTO extends TransferObject {
     }
 
     @Null
+    @Ignore
     public Integer getState() {
         return state;
     }

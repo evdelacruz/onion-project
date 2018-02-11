@@ -12,7 +12,7 @@ public class OrderCriteria extends Criteria<Order> {
     }
 
     @Override
-    public void buildPredicate() {
+    public void buildSpecification() {
         this.eq("state", state);
     }
 

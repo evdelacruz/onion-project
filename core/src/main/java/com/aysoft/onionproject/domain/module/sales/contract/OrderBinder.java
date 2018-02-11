@@ -1,7 +1,7 @@
 package com.aysoft.onionproject.domain.module.sales.contract;
 
-import com.aysoft.onionproject.domain.module.sales.contract.vo.OrderCriteriaTO;
-import com.aysoft.onionproject.domain.module.sales.contract.vo.OrderTO;
+import com.aysoft.onionproject.domain.module.sales.contract.to.OrderCriteriaTO;
+import com.aysoft.onionproject.domain.module.sales.contract.to.OrderTO;
 import com.aysoft.onionproject.domain.module.sales.datasource.domain.Order;
 import com.aysoft.onionproject.domain.module.sales.datasource.query.OrderCriteria;
 import com.aysoft.onionproject.infrastructure.seedwork.service.criteria.PagedList;

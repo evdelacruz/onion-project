@@ -1,6 +1,6 @@
-package com.aysoft.onionproject.domain.module.sales.contract.vo;
+package com.aysoft.onionproject.domain.module.sales.contract.to;
 
-import com.aysoft.onionproject.infrastructure.seedwork.binding.vo.CriteriaTO;
+import com.aysoft.onionproject.infrastructure.seedwork.binding.to.CriteriaTO;
 
 public class OrderCriteriaTO extends CriteriaTO {
     private static final long serialVersionUID = -6146889409606660956L;

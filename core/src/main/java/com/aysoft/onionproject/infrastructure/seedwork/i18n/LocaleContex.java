@@ -11,7 +11,7 @@ public class LocaleContex {
         LocaleContextHolder.setDefaultLocale(DEFAULT);
     }
 
-    static public Locale locale() {
+    static public Locale getLocale() {
         return LocaleContextHolder.getLocale();
     }
 
@@ -24,6 +24,6 @@ public class LocaleContex {
     }
 
     private LocaleContex() {
-        throw new AssertionError("No 'LocaleHolder' instances for you!");
+        throw new AssertionError("No 'LocaleContex' instances for you!");
     }
 }

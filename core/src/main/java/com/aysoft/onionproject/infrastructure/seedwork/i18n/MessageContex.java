@@ -20,11 +20,11 @@ public class MessageContex {
     }
 
     static public String msg(String code) {
-        return SOURCE.getMessage(code, null, LocaleContex.locale());
+        return SOURCE.getMessage(code, null, LocaleContex.getLocale());
     }
 
     static public String msg(String code, Object... args) {
-        return SOURCE.getMessage(code, 0 != args.length ? args : null, LocaleContex.locale());
+        return SOURCE.getMessage(code, 0 != args.length ? args : null, LocaleContex.getLocale());
     }
 
     private MessageContex() {

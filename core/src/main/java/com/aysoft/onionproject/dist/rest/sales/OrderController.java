@@ -1,15 +1,17 @@
 package com.aysoft.onionproject.dist.rest.sales;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
-import static java.util.List.of;
-
 import com.aysoft.onionproject.application.module.sales.OrderFacade;
 import com.aysoft.onionproject.dist.rest.commons.CatalogController;
-import com.aysoft.onionproject.domain.module.sales.contract.vo.OrderCriteriaTO;
-import com.aysoft.onionproject.domain.module.sales.contract.vo.OrderTO;
+import com.aysoft.onionproject.domain.module.sales.contract.to.OrderCriteriaTO;
+import com.aysoft.onionproject.domain.module.sales.contract.to.OrderTO;
 import com.aysoft.onionproject.infrastructure.seedwork.web.Controller;
+import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+import static java.util.List.of;
 
 @RestController
 @RequestMapping("/orders")
@@ -27,16 +29,17 @@ public class OrderController extends Controller<OrderFacade> {
 
     @GetMapping
     public ResponseEntity search(OrderCriteriaTO criteria) {
-        return this.wrapPagedList(facade -> facade.searchOrders(criteria), OrderTO::getId);
+        return this.getPagedList(facade -> facade.searchOrders(criteria));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity get(@PathVariable int id) {
-        return this.wrap(
-                facade -> facade.loadOrder(id),
-                order -> of(
-                        linkTo(methodOn(CatalogController.class).get("order-states", order.getState())).withRel("state")
-                )
-        );
+        return this.get(facade -> facade.loadOrder(id), this::getLinks);
     }
+
+    //<editor-fold desc="Support methods">
+    private List<Link> getLinks(OrderTO order) {
+        return of(linkTo(methodOn(CatalogController.class).get("order-states", order.getState())).withRel("state"));
+    }
+    //</editor-fold>
 }

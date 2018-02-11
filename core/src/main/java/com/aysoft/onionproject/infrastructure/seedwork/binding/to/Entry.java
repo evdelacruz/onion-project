@@ -1,4 +1,4 @@
-package com.aysoft.onionproject.infrastructure.seedwork.binding.vo;
+package com.aysoft.onionproject.infrastructure.seedwork.binding.to;
 
 import javax.validation.constraints.NotNull;
 

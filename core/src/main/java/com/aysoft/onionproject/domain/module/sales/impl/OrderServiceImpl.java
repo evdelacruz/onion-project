@@ -1,16 +1,16 @@
 package com.aysoft.onionproject.domain.module.sales.impl;
 
-import static com.aysoft.onionproject.domain.module.sales.contract.OrderBinder.ORDER_BINDER;
-
 import com.aysoft.onionproject.domain.module.sales.OrderService;
-import com.aysoft.onionproject.domain.module.sales.contract.vo.OrderCriteriaTO;
-import com.aysoft.onionproject.domain.module.sales.contract.vo.OrderTO;
+import com.aysoft.onionproject.domain.module.sales.contract.to.OrderCriteriaTO;
+import com.aysoft.onionproject.domain.module.sales.contract.to.OrderTO;
 import com.aysoft.onionproject.domain.module.sales.datasource.OrderRepository;
 import com.aysoft.onionproject.domain.module.sales.datasource.domain.Order;
 import com.aysoft.onionproject.infrastructure.seedwork.service.criteria.PagedList;
 import com.aysoft.onionproject.infrastructure.seedwork.service.stereotype.Service;
 import org.springframework.data.domain.Page;
 import javax.inject.Inject;
+
+import static com.aysoft.onionproject.domain.module.sales.contract.OrderBinder.ORDER_BINDER;
 
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {

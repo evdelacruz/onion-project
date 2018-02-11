@@ -23,7 +23,7 @@ public interface EntityRepository<E extends AbstractEntity, I extends Serializab
     Stream<E> findAll();
 
     default Page<E> findAll(Criteria<E> criteria) {
-        return this.findAll(criteria, criteria.buildPageRequest());
+        return this.findAll(criteria, criteria.pageRequest());
     }
 
     Page<E> findAll(Specification<E> spec, Pageable pageable);

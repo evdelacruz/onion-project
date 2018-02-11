@@ -4,6 +4,7 @@ import com.aysoft.onionproject.infrastructure.seedwork.service.repository.domain
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import java.util.List;
 
 public abstract class Criteria<E extends AbstractEntity> extends AbstractSpecification<E> {
@@ -12,10 +13,15 @@ public abstract class Criteria<E extends AbstractEntity> extends AbstractSpecifi
 
     public abstract String sortProperty();
 
-    public PageRequest buildPageRequest() {
-        Direction direction = this.asc() ? Direction.ASC : Direction.DESC;
-        List<String> properties = List.of(this.sortProperty());
-        return new PageRequest(page, size, new Sort(direction, properties));
+    public PageRequest pageRequest() {
+        Sort sort = null;
+        String property = this.sortProperty();
+        if (null != property) {
+            Direction direction = this.asc() ? Direction.ASC : Direction.DESC;
+            Order order = new Order(direction, this.sortProperty());
+            sort = new Sort(List.of(order));
+        }
+        return new PageRequest(this.getPage(), this.getSize(), sort);
     }
 
     protected boolean asc() {
@@ -23,16 +29,16 @@ public abstract class Criteria<E extends AbstractEntity> extends AbstractSpecifi
     }
 
     //<editor-fold desc="Encapsulation">
-    public int getPage() {
-        return page;
+    public final int getPage() {
+        return 0 > page ? 0 : page;
     }
 
     public void setPage(int page) {
         this.page = page;
     }
 
-    public int getSize() {
-        return size;
+    public final int getSize() {
+        return 0 <= size ? 20 : size;
     }
 
     public void setSize(int size) {

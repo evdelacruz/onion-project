@@ -1,4 +1,4 @@
-package com.aysoft.onionproject.infrastructure.seedwork.binding.vo;
+package com.aysoft.onionproject.infrastructure.seedwork.binding.to;
 
 public class CriteriaTO extends TransferObject {
     private static final long serialVersionUID = -631799705757521671L;
